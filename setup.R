@@ -28,7 +28,8 @@ library(wesanderson)
 library(hrbrthemes)
 library(ggsci)
 library(stats)
+library(patchwork)
 
 expand.grid.df <- function(...) Reduce(function(...) merge.data.frame(..., by = NULL, all = TRUE), list(...))
 
-outputdir <- "/Users/florale/Library/CloudStorage/OneDrive-MonashUniversity/PhD/projects/sleep-stage-composition/sleep-stages-affect/data/"
+outputdir <- "/Users/florale/Library/CloudStorage/OneDrive-MonashUniversity/PhD/projects/multilevelecoda-sleep-stages/sleep-stages-affect/data/"

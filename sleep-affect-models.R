@@ -1,14 +1,6 @@
 source("data.R")
 
 # full ------------------
-cilrw_hapa <- compilr(d[Survey == "Wake"], sbp = sbp4, 
-                      parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
-cilrw_lapa <- compilr(d[Survey == "Wake"], sbp = sbp4, 
-                      parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
-cilrw_hana <- compilr(d[Survey == "Wake"], sbp = sbp4, 
-                      parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
-cilrw_lana <- compilr(d[Survey == "Wake"], sbp = sbp4, 
-                      parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
 
 m_hapa <- brmcoda(compilr = cilrw_hapa,
                   formula = PosAffHALead ~ 

@@ -10,12 +10,15 @@ col <- c("#978787", "#C99696", "#C6BFB9", "#A1B2C2", "#647F9A") #lpa #mvpa #sb #
 colf <- c("#B2ABA6", "#B2ABA6", "#B2ABA6", "#B2ABA6", "#B2ABA6")
 colf <- c("#978787", "#C99696", "#B2ABA6", "#A1B2C2", "#647F9A") #lpa #mvpa #sb #wake #tst
 
-col <- c("#FAD899", "#B2ABA6", "#84a98c", "#52796f", "#FAD899", "#B2ABA6", "#84a98c", "#52796f") 
-colf <- c("#FAD899", "#B2ABA6", "#90B197", "#829E97", "#FAD899", "#B2ABA6", "#90B197", "#829E97")
+# col <- c("#7F7F7F", "#C99696", "#41765a", "#82a794", "#7F7F7F", "#C99696", "#41765a", "#82a794")
+# colf <- c("#BFBFBF", "#D1ACA5", "#7A9F8B", "#91B2A1", "#BFBFBF", "#D1ACA5", "#7A9F8B", "#91B2A1")
+
+col <- c("#7F7F7F", "#41765a", "#FAD899", "#83A192", "#7F7F7F", "#41765a", "#FAD899", "#83A192")
+colf <- c("#BFBFBF", "#7A9F8B", "#FAD899", "#AFC7BB", "#BFBFBF", "#7A9F8B", "#FAD899", "#AFC7BB")
 
 colour <- c("#EFE3E0", "#BEACA2", "#708885", "#5A6367")
 
-names <- c(`WAKE` = "Awake in Bed",
+names <- c(`WAKE` = "Total Wake Time",
            `SleepLight` = "Light Sleep",
            `SleepDeep` = "Slow Wave Sleep",
            `SleepREM` = "REM Sleep")
@@ -23,7 +26,7 @@ labeller <- function(variable,value){
   return(names[value])
 }
 
-# read models
+# read models ----------------
 m_hapa <- readRDS(paste0(outputdir, "m_hapa", ".RDS"))
 m_lapa <- readRDS(paste0(outputdir, "m_lapa", ".RDS"))
 m_hana <- readRDS(paste0(outputdir, "m_hana", ".RDS"))
@@ -44,8 +47,8 @@ summary(m_lana_sub_adj, delta = 30)
    plot(m_hapa_sub_adj, ref = "grandmean", level = "between", to = "WAKE") +
    scale_colour_manual(values = col[1:3]) +
    scale_fill_manual(values = colf[1:3]) +
-   labs(x = "Minutes Reallocation of Awake in Bed at Between-person level",
-        y = "High Arousal Positive Affect") +
+   labs(x = "Change in Minutes in Awake in Bed at Between-person level",
+        y = "Change in High Arousal Positive Affect") +
    facet_grid(~From, labeller = labeller) +
    scale_x_continuous(breaks = c(-60, 0, 60)) +
    scale_y_continuous(limits = c(-2.25, 2.25),
@@ -69,8 +72,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_hapa_sub_adj, ref = "grandmean", level = "between", to = "SleepLight") +
     scale_colour_manual(values = col[2:4]) +
     scale_fill_manual(values = colf[2:4]) +
-    labs(x = "Minutes Reallocation of Light Sleep at Between-person level",
-         y = "High Arousal Positive Affect") +
+    labs(x = "Change in Minutes in Light Sleep at Between-person level",
+         y = "HChange in igh Arousal Positive Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-2.5, 2.25),
@@ -94,8 +97,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_hapa_sub_adj, ref = "grandmean", level = "between", to = "SleepDeep") +
     scale_colour_manual(values = col[3:5]) +
     scale_fill_manual(values = colf[3:5]) +
-    labs(x = "Minutes Reallocation of Slow Wave Sleep at Between-person level",
-         y = "High Arousal Positive Affect") +
+    labs(x = "Change in Minutes in Slow Wave Sleep at Between-person level",
+         y = "Change in High Arousal Positive Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-2.5, 2.25),
@@ -119,8 +122,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_hapa_sub_adj, ref = "grandmean", level = "between", to = "SleepREM") +
     scale_colour_manual(values = col[4:6]) +
     scale_fill_manual(values = colf[4:6]) +
-    labs(x = "Minutes Reallocation of REM Sleep at Between-person level",
-         y = "High Arousal Positive Affect") +
+    labs(x = "Change in Minutes REM Sleep at Between-person level",
+         y = "Change in High Arousal Positive Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-2.5, 2.25),
@@ -145,8 +148,8 @@ summary(m_lana_sub_adj, delta = 30)
    plot(m_lapa_sub_adj, ref = "grandmean", level = "between", to = "WAKE") +
    scale_colour_manual(values = col[1:3]) +
    scale_fill_manual(values = colf[1:3]) +
-   labs(x = "Minutes Reallocation of Awake in Bed at Between-person level",
-        y = "Low Arousal Positive Affect") +
+   labs(x = "Change in Minutes in  Awake in Bed at Between-person level",
+        y = "Change in Low Arousal Positive Affect") +
    facet_grid(~From, labeller = labeller) +
    scale_x_continuous(breaks = c(-60, 0, 60)) +
    scale_y_continuous(limits = c(-2.25, 2.25),
@@ -170,7 +173,7 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_lapa_sub_adj, ref = "grandmean", level = "between", to = "SleepLight") +
     scale_colour_manual(values = col[2:4]) +
     scale_fill_manual(values = colf[2:4]) +
-    labs(x = "Minutes Reallocation of Light Sleep at Between-person level",
+    labs(x = "Changes in Minutes in Light Sleep at Between-person level",
          y = "Low Arousal Positive Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
@@ -195,8 +198,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_lapa_sub_adj, ref = "grandmean", level = "between", to = "SleepDeep") +
     scale_colour_manual(values = col[3:5]) +
     scale_fill_manual(values = colf[3:5]) +
-    labs(x = "Minutes Reallocation of Slow Wave Sleep at Between-person level",
-         y = "Low Arousal Positive Affect") +
+    labs(x = "Changes in Minutes in Slow Wave Sleep at Between-person level",
+         y = "Changes in Low Arousal Positive Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-2.5, 2.25),
@@ -221,8 +224,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_lapa_sub_adj, ref = "grandmean", level = "between", to = "SleepREM") +
     scale_colour_manual(values = col[4:6]) +
     scale_fill_manual(values = colf[4:6]) +
-    labs(x = "Minutes Reallocation of REM Sleep at Between-person level",
-         y = "Low Arousal Positive Affect") +
+    labs(x = "Changes in Minutes in REM Sleep at Between-person level",
+         y = "Changes in Low Arousal Positive Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-2.5, 2.25),
@@ -247,8 +250,8 @@ summary(m_lana_sub_adj, delta = 30)
    plot(m_hana_sub_adj, ref = "grandmean", level = "between", to = "WAKE") +
    scale_colour_manual(values = col[1:3]) +
    scale_fill_manual(values = colf[1:3]) +
-   labs(x = "Minutes Reallocation of Awake in Bed at Between-person level",
-        y = "High Arousal Negative Affect") +
+   labs(x = "Change in Minutes in Awake in Bed at Between-person level",
+        y = "Change in High Arousal Negative Affect") +
    facet_grid(~From, labeller = labeller) +
    scale_x_continuous(breaks = c(-60, 0, 60)) +
    scale_y_continuous(limits = c(-2.25, 2.25),
@@ -272,8 +275,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_hana_sub_adj, ref = "grandmean", level = "between", to = "SleepLight") +
     scale_colour_manual(values = col[2:4]) +
     scale_fill_manual(values = colf[2:4]) +
-    labs(x = "Minutes Reallocation of Light Sleep at Between-person level",
-         y = "High Arousal Negative Affect") +
+    labs(x = "Changes in Minutes in Light Sleep at Between-person level",
+         y = "Changes in High Arousal Negative Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-2.25, 2.25),
@@ -297,8 +300,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_hana_sub_adj, ref = "grandmean", level = "between", to = "SleepDeep") +
     scale_colour_manual(values = col[3:5]) +
     scale_fill_manual(values = colf[3:5]) +
-    labs(x = "Minutes Reallocation of Slow Wave Sleep at Between-person level",
-         y = "High Arousal Negative Affect") +
+    labs(x = "Changes in Minutes in Slow Wave Sleep at Between-person level",
+         y = "Changes in High Arousal Negative Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-2.25, 2.25),
@@ -322,8 +325,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_hana_sub_adj, ref = "grandmean", level = "between", to = "SleepREM") +
     scale_colour_manual(values = col[4:6]) +
     scale_fill_manual(values = colf[4:6]) +
-    labs(x = "Minutes Reallocation of REM Sleep at Between-person level",
-         y = "High Arousal Negative Affect") +
+    labs(x = "Changes in Minutes in REM Sleep at Between-person level",
+         y = "Changes in High Arousal Negative Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-2.25, 2.25),
@@ -348,8 +351,8 @@ summary(m_lana_sub_adj, delta = 30)
    plot(m_lana_sub_adj, ref = "grandmean", level = "between", to = "WAKE") +
    scale_colour_manual(values = col[1:3]) +
    scale_fill_manual(values = colf[1:3]) +
-   labs(x = "Minutes Reallocation of Awake in Bed at Between-person level",
-        y = "Low Arousal Negative Affect") +
+   labs(x = "Change in Minutes in Awake in Bed at Between-person level",
+        y = "Change in Low Arousal Negative Affect") +
    facet_grid(~From, labeller = labeller) +
    scale_x_continuous(breaks = c(-60, 0, 60)) +
    scale_y_continuous(limits = c(-2.25, 2.25),
@@ -373,8 +376,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_lana_sub_adj, ref = "grandmean", level = "between", to = "SleepLight") +
     scale_colour_manual(values = col[2:4]) +
     scale_fill_manual(values = colf[2:4]) +
-    labs(x = "Minutes Reallocation of Light Sleep at Between-person level",
-         y = "Low Arousal Negative Affect") +
+    labs(x = "Changes in Minutes in Light Sleep at Between-person level",
+         y = "Changes in Low Arousal Negative Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-2.25, 2.25),
@@ -398,8 +401,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_lana_sub_adj, ref = "grandmean", level = "between", to = "SleepDeep") +
     scale_colour_manual(values = col[3:5]) +
     scale_fill_manual(values = colf[3:5]) +
-    labs(x = "Minutes Reallocation of Slow Wave Sleep at Between-person level",
-         y = "Low Arousal Negative Affect") +
+    labs(x = "Changes in Minutes in Slow Wave Sleep at Between-person level",
+         y = "Changes in Low Arousal Negative Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-2.5, 2.25),
@@ -423,8 +426,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_lana_sub_adj, ref = "grandmean", level = "between", to = "SleepREM") +
     scale_colour_manual(values = col[4:6]) +
     scale_fill_manual(values = colf[4:6]) +
-    labs(x = "Minutes Reallocation of REM Sleep at Between-person level",
-         y = "Low Arousal Negative Affect") +
+    labs(x = "Changes in Minutes in REM Sleep at Between-person level",
+         y = "Changes in Low Arousal Negative Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-2.75, 2.25),
@@ -449,8 +452,8 @@ summary(m_lana_sub_adj, delta = 30)
    plot(m_hapa_sub_adj, ref = "grandmean", level = "within", to = "WAKE") +
    scale_colour_manual(values = col[1:3]) +
    scale_fill_manual(values = colf[1:3]) +
-   labs(x = "Minutes Reallocation of Awake in Bed at Within-person level",
-        y = "High Arousal Positive Affect") +
+   labs(x = "Change in Minutes in Awake in Bed at Within-person level",
+        y = "Changes in Change in High Arousal Positive Affect") +
    facet_grid(~From, labeller = labeller) +
    scale_x_continuous(breaks = c(-60, 0, 60)) +
    scale_y_continuous(limits = c(-0.5, 0.5),
@@ -474,8 +477,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_hapa_sub_adj, ref = "grandmean", level = "within", to = "SleepLight") +
     scale_colour_manual(values = col[2:4]) +
     scale_fill_manual(values = colf[2:4]) +
-    labs(x = "Minutes Reallocation of Light Sleep at Within-person level",
-         y = "High Arousal Positive Affect") +
+    labs(x = "Changes in Minutes in Light Sleep at Within-person level",
+         y = "Changes in High Arousal Positive Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-0.5, 0.5),
@@ -499,8 +502,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_hapa_sub_adj, ref = "grandmean", level = "within", to = "SleepDeep") +
     scale_colour_manual(values = col[3:5]) +
     scale_fill_manual(values = colf[3:5]) +
-    labs(x = "Minutes Reallocation of Slow Wave Sleep at Within-person level",
-         y = "High Arousal Positive Affect") +
+    labs(x = "Changes in Minutes in Slow Wave Sleep at Within-person level",
+         y = "Changes in High Arousal Positive Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-0.5, 0.5),
@@ -524,8 +527,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_hapa_sub_adj, ref = "grandmean", level = "within", to = "SleepREM") +
     scale_colour_manual(values = col[4:6]) +
     scale_fill_manual(values = colf[4:6]) +
-    labs(x = "Minutes Reallocation of REM Sleep at Within-person level",
-         y = "High Arousal Positive Affect") +
+    labs(x = "Changes in Minutes in REM Sleep at Within-person level",
+         y = "Changes in High Arousal Positive Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-0.5, 0.5),
@@ -550,8 +553,8 @@ summary(m_lana_sub_adj, delta = 30)
    plot(m_lapa_sub_adj, ref = "grandmean", level = "within", to = "WAKE") +
    scale_colour_manual(values = col[1:3]) +
    scale_fill_manual(values = colf[1:3]) +
-   labs(x = "Minutes Reallocation of Awake in Bed at Within-person level",
-        y = "Low Arousal Positive Affect") +
+   labs(x = "Change in Minutes in Awake in Bed at Within-person level",
+        y = "Change in Low Arousal Positive Affect") +
    facet_grid(~From, labeller = labeller) +
    scale_x_continuous(breaks = c(-60, 0, 60)) +
    scale_y_continuous(limits = c(-0.5, 0.5),
@@ -575,8 +578,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_lapa_sub_adj, ref = "grandmean", level = "within", to = "SleepLight") +
     scale_colour_manual(values = col[2:4]) +
     scale_fill_manual(values = colf[2:4]) +
-    labs(x = "Minutes Reallocation of Light Sleep at Within-person level",
-         y = "Low Arousal Positive Affect") +
+    labs(x = "Changes in Minutes in Light Sleep at Within-person level",
+         y = "Changes in Low Arousal Positive Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-0.5, 0.5),
@@ -600,8 +603,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_lapa_sub_adj, ref = "grandmean", level = "within", to = "SleepDeep") +
     scale_colour_manual(values = col[3:5]) +
     scale_fill_manual(values = colf[3:5]) +
-    labs(x = "Minutes Reallocation of Slow Wave Sleep at Within-person level",
-         y = "Low Arousal Positive Affect") +
+    labs(x = "Changes in Minutes in Slow Wave Sleep at Within-person level",
+         y = "Changes in Low Arousal Positive Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-0.5, 0.5),
@@ -625,8 +628,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_lapa_sub_adj, ref = "grandmean", level = "within", to = "SleepREM") +
     scale_colour_manual(values = col[4:6]) +
     scale_fill_manual(values = colf[4:6]) +
-    labs(x = "Minutes Reallocation of REM Sleep at Within-person level",
-         y = "Low Arousal Positive Affect") +
+    labs(x = "Changes in Minutes in REM Sleep at Within-person level",
+         y = "Changes in Low Arousal Positive Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-0.5, 0.5),
@@ -651,8 +654,8 @@ summary(m_lana_sub_adj, delta = 30)
    plot(m_hana_sub_adj, ref = "grandmean", level = "within", to = "WAKE") +
    scale_colour_manual(values = col[1:3]) +
    scale_fill_manual(values = colf[1:3]) +
-   labs(x = "Minutes Reallocation of Awake in Bed at Within-person level",
-        y = "High Arousal Negative Affect") +
+   labs(x = "Change in Minutes in Awake in Bed at Within-person level",
+        y = "Change in High Arousal Negative Affect") +
    facet_grid(~From, labeller = labeller) +
    scale_x_continuous(breaks = c(-60, 0, 60)) +
    scale_y_continuous(limits = c(-0.5, 0.5),
@@ -676,8 +679,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_hana_sub_adj, ref = "grandmean", level = "within", to = "SleepLight") +
     scale_colour_manual(values = col[2:4]) +
     scale_fill_manual(values = colf[2:4]) +
-    labs(x = "Minutes Reallocation of Light Sleep at Within-person level",
-         y = "High Arousal Negative Affect") +
+    labs(x = "Changes in Minutes in Light Sleep at Within-person level",
+         y = "Changes in High Arousal Negative Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-0.5, 0.5),
@@ -701,8 +704,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_hana_sub_adj, ref = "grandmean", level = "within", to = "SleepDeep") +
     scale_colour_manual(values = col[3:5]) +
     scale_fill_manual(values = colf[3:5]) +
-    labs(x = "Minutes Reallocation of Slow Wave Sleep at Within-person level",
-         y = "High Arousal Negative Affect") +
+    labs(x = "Changes in Minutes in Slow Wave Sleep at Within-person level",
+         y = "Changes in High Arousal Negative Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-0.5, 0.5),
@@ -726,8 +729,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_hana_sub_adj, ref = "grandmean", level = "within", to = "SleepREM") +
     scale_colour_manual(values = col[4:6]) +
     scale_fill_manual(values = colf[4:6]) +
-    labs(x = "Minutes Reallocation of REM Sleep at Within-person level",
-         y = "High Arousal Negative Affect") +
+    labs(x = "Changes in Minutes in REM Sleep at Within-person level",
+         y = "Changes in High Arousal Negative Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-0.5, 0.5),
@@ -752,8 +755,8 @@ summary(m_lana_sub_adj, delta = 30)
    plot(m_lana_sub_adj, ref = "grandmean", level = "within", to = "WAKE") +
    scale_colour_manual(values = col[1:3]) +
    scale_fill_manual(values = colf[1:3]) +
-   labs(x = "Minutes Reallocation of Awake in Bed at Within-person level",
-        y = "Low Arousal Negative Affect") +
+   labs(x = "Change in Minutes in Awake in Bed at Within-person level",
+        y = "Change in Low Arousal Negative Affect") +
    facet_grid(~From, labeller = labeller) +
    scale_x_continuous(breaks = c(-60, 0, 60)) +
    scale_y_continuous(limits = c(-0.5, 0.5),
@@ -777,8 +780,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_lana_sub_adj, ref = "grandmean", level = "within", to = "SleepLight") +
     scale_colour_manual(values = col[2:4]) +
     scale_fill_manual(values = colf[2:4]) +
-    labs(x = "Minutes Reallocation of Light Sleep at Within-person level",
-         y = "Low Arousal Negative Affect") +
+    labs(x = "Changes in Minutes in Light Sleep at Within-person level",
+         y = "Changes in Low Arousal Negative Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-0.5, 0.5),
@@ -802,8 +805,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_lana_sub_adj, ref = "grandmean", level = "within", to = "SleepDeep") +
     scale_colour_manual(values = col[3:5]) +
     scale_fill_manual(values = colf[3:5]) +
-    labs(x = "Minutes Reallocation of Slow Wave Sleep at Within-person level",
-         y = "Low Arousal Negative Affect") +
+    labs(x = "Changes in Minutes in Slow Wave Sleep at Within-person level",
+         y = "Changes in Low Arousal Negative Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-0.5, 0.5),
@@ -827,8 +830,8 @@ summary(m_lana_sub_adj, delta = 30)
     plot(m_lana_sub_adj, ref = "grandmean", level = "within", to = "SleepREM") +
     scale_colour_manual(values = col[4:6]) +
     scale_fill_manual(values = colf[4:6]) +
-    labs(x = "Minutes Reallocation of REM Sleep at Within-person level",
-         y = "Low Arousal Negative Affect") +
+    labs(x = "Changes in Minutes in REM Sleep at Within-person level",
+         y = "Changes in Low Arousal Negative Affect") +
     facet_grid(~From, labeller = labeller) +
     scale_x_continuous(breaks = c(-60, 0, 60)) +
     scale_y_continuous(limits = c(-0.5, 0.5),
@@ -850,16 +853,65 @@ summary(m_lana_sub_adj, delta = 30)
 
 # print plots --------------------------
 # save as 8x4
-
 #sig
+grDevices::cairo_pdf(
+  file = paste0(outputdir, "plotb_hapa_deep", ".pdf"),
+  width = 8,
+  height = 4,
+)
 plotb_hapa_deep
-plotb_hapa_light
+dev.off()
 
+grDevices::cairo_pdf(
+  file = paste0(outputdir, "plotb_lapa_deep", ".pdf"),
+  width = 8,
+  height = 4,
+)
 plotb_lapa_deep
-plotb_hana_deep
+dev.off()
 
+grDevices::cairo_pdf(
+  file = paste0(outputdir, "plotb_hana_deep", ".pdf"),
+  width = 8,
+  height = 4,
+)
+plotb_hana_deep
+dev.off()
+
+grDevices::cairo_pdf(
+  file = paste0(outputdir, "plotw_hana_rem", ".pdf"),
+  width = 8,
+  height = 4,
+)
 plotw_hana_rem
+dev.off()
+
+
+grDevices::cairo_pdf(
+  file = paste0(outputdir, "plotw_lana_wake", ".pdf"),
+  width = 8,
+  height = 4,
+)
 plotw_lana_wake
+dev.off()
+
+grDevices::cairo_pdf(
+  file = paste0(outputdir, "plot_pa", ".pdf"),
+  width = 8,
+  height = 7.5,
+)
+ggarrange(plotb_hapa_deep, plotb_lapa_deep, nrow = 2, legend = "none")
+dev.off()
+
+grDevices::cairo_pdf(
+  file = paste0(outputdir, "plot_na", ".pdf"),
+  width = 8,
+  height = 11,
+)
+ggarrange(plotb_hana_deep, plotw_hana_rem, plotw_lana_wake, nrow = 3, legend = "none")
+dev.off()
+
+# plotb_hana_deep / plotw_hana_rem / plotw_lana_wake
 
 # rest
 plotw_hapa_deep
