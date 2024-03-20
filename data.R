@@ -43,7 +43,7 @@ d[, c("PosAffHALeadLag2", "PosAffLALeadLag2", "NegAffHALeadLag2", "NegAffLALeadL
 
 d[, IDxDay := paste(ID, StudyDay, sep = "-")]
 
-# decompose
+# create between within affect
 # d[, c("BPosAffHALeadLag", "WPosAffHALeadLag") := meanDeviations(PosAffHALeadLag), by = ID]
 # d[, c("BPosAffLALeadLag", "WPosAffLALeadLag") := meanDeviations(PosAffLALeadLag), by = ID]
 # d[, c("BNegAffHALeadLag", "WNegAffHALeadLag") := meanDeviations(NegAffHALeadLag), by = ID]
@@ -96,6 +96,7 @@ d[, c("BPosAffDayLag", "WPosAffDayLag") := meanDeviations(PosAffDayLag), by = ID
 d[, c("BNegAffDayLag", "WNegAffDayLag") := meanDeviations(NegAffDayLag), by = ID]
 d[, c("BSTRESSDayLag", "WSTRESSDayLag") := meanDeviations(STRESSDayLag), by = ID]
 
+# prepare sleep data 
 d[, SleepLight := first(na.omit(SleepLight)), c("ID", "SurveyDay")]
 d[, SleepDeep := first(na.omit(SleepDeep)), c("ID", "SurveyDay")]
 d[, SleepREM := first(na.omit(SleepREM)), c("ID", "SurveyDay")]
@@ -103,6 +104,7 @@ d[, WASORAWz := first(na.omit(WASORAWz)), c("ID", "SurveyDay")]
 d[, SOLRAWz := first(na.omit(SOLRAWz)), c("ID", "SurveyDay")]
 d[, TIBz := first(na.omit(TIBz)), c("ID", "SurveyDay")]
 
+d[, TIBz := TIBz*60]
 d[, SleepLight := SleepLight*60]
 d[, SleepDeep := SleepDeep*60]
 d[, SleepREM := SleepREM*60]
@@ -158,6 +160,7 @@ hist(d$NegAffLALead)
 #   Age, Sex, RACE3G, BMI, SES_1, CurrentWork, SmokingStatus, AUDITCat
 # )]
 
+# sequential binary partition
 sbp4 <- matrix(c(
   1, -1, -1,-1,
   0, 1, -1, -1,
@@ -172,10 +175,62 @@ View(d[,.(ID, SurveyDay, Survey, PosAffHA, PosAffHALead, BPosAffHALead, PosAffHA
           PosAffLA, NegAffHA, NegAffLA, PosAffLALead, WPosAffLALeadLag1, NegAffHALead, WNegAffHALeadLag1, NegAffLALead, WNegAffLALeadLag1, 
           SleepLight, SleepDeep, SleepREM, WAKE, TIBz, CPDzc18)])
 
+
+# make composition and ilr
+cilrw_hapa <- compilr(d[Survey == "Wake"], sbp = sbp4, 
+                      parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
+cilrw_lapa <- compilr(d[Survey == "Wake"], sbp = sbp4, 
+                      parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
+cilrw_hana <- compilr(d[Survey == "Wake"], sbp = sbp4, 
+                      parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
+cilrw_lana <- compilr(d[Survey == "Wake"], sbp = sbp4, 
+                      parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
+
+summary(cilrw_hapa)
+summary(cilrw_lapa)
+summary(cilrw_hana)
+summary(cilrw_lana)
+
+
 # descriptive stats
+fvars <- c("Sex", "SmokingStatus", "CurrentWork", "AUDITCat", "DEDUUniPlus", "WeekDay", "BornAUS")
 egltable(c("PosAffHALead", "PosAffLALead", "NegAffHALead", "NegAffLALead",
-           "WPosAffHALeadLag1", "WPosAffLALeadLag1", "WNegAffHALeadLag1", "WNegAffLALeadLag1",
-           "SleepLight", "SleepDeep", "SleepREM", "WAKE",
-           "BTIBz", "WTIBz",
-           "WeekDay", "CPDzc18", 
-           "Age", "Sex", "RACE3G", "BMI", "SES_1" ), data = d)
+           "PosAffHALeadLag1", "PosAffLALeadLag1", "NegAffHALeadLag1", "NegAffLALeadLag1",
+           "SleepLight", "SleepDeep", "SleepREM", "WAKE", "TIBz",
+           "WeekDay", "CPDzc18",
+           "SmokingStatus", "CurrentWork", "AUDITCat", "DEDUUniPlus", "BornAUS",
+           "Age", "Sex", "RACE3G", "BMI", "SES_1" ),
+         idvar = "ID",
+         data = d[Survey == "Wake"][, (fvars) := lapply(.SD, as.factor), .SDcols = fvars]
+)
+
+# ICC
+multilevelTools::iccMixed(c("PosAffHALead"), id = "ID", data = d[Survey == "Wake"])
+multilevelTools::iccMixed(c("PosAffLALead"), id = "ID", data = d[Survey == "Wake"])
+multilevelTools::iccMixed(c("NegAffHALead"), id = "ID", data = d[Survey == "Wake"])
+multilevelTools::iccMixed(c("NegAffLALead"), id = "ID", data = d[Survey == "Wake"])
+
+multilevelTools::iccMixed(c("SleepLight"), id = "ID", data = d[Survey == "Wake"])
+multilevelTools::iccMixed(c("SleepDeep"), id = "ID", data = d[Survey == "Wake"])
+multilevelTools::iccMixed(c("SleepREM"), id = "ID", data = d[Survey == "Wake"])
+multilevelTools::iccMixed(c("WAKE"), id = "ID", data = d[Survey == "Wake"])
+multilevelTools::iccMixed(c("TIBz"), id = "ID", data = d[Survey == "Wake"])
+
+multilevelTools::iccMixed(c("CPDzc18"), id = "ID", data = d[Survey == "Wake"])
+
+# nobs
+nrow(d[Survey == "Wake"][complete.cases(PosAffHALead)])
+nrow(d[Survey == "Wake"][complete.cases(PosAffLALead)])
+nrow(d[Survey == "Wake"][complete.cases(NegAffHALead)])
+nrow(d[Survey == "Wake"][complete.cases(NegAffLALead)])
+
+nrow(d[Survey == "Wake"][complete.cases(SleepLight)])
+nrow(d[Survey == "Wake"][complete.cases(SleepDeep)])
+nrow(d[Survey == "Wake"][complete.cases(SleepREM)])
+nrow(d[Survey == "Wake"][complete.cases(WAKE)])
+nrow(d[Survey == "Wake"][complete.cases(TIBz)])
+
+nrow(d[Survey == "Wake"][complete.cases(CPDzc18)])
+
+nrow(d[Survey == "Wake"][complete.cases(Age)][!duplicated(ID)])
+
