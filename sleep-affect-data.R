@@ -18,7 +18,7 @@ d[, c("PosAffHADayLag", "PosAffLADayLag", "NegAffHADayLag", "NegAffLADayLag",
           PosAffDay, NegAffDay, STRESSDay),
         on = c("ID", "SurveyDay", "Survey")]]
 
-# next(lead) day by survey
+# next(lead) day by survey - used variables
 d[, c("PosAffHALead", "PosAffLALead", "NegAffHALead", "NegAffLALead", 
       "PosAffLead", "NegAffLead", "STRESSLead") :=
     .SD[.(ID = ID, Survey = Survey, SurveyDay = SurveyDay + 1),
@@ -192,7 +192,8 @@ summary(cilrw_hana)
 summary(cilrw_lana)
 
 
-# descriptive stats
+## Descriptive stats ---------------------------
+
 fvars <- c("Sex", "SmokingStatus", "CurrentWork", "AUDITCat", "DEDUUniPlus", "WeekDay", "BornAUS")
 egltable(c("PosAffHALead", "PosAffLALead", "NegAffHALead", "NegAffLALead",
            "PosAffHALeadLag1", "PosAffLALeadLag1", "NegAffHALeadLag1", "NegAffLALeadLag1",
