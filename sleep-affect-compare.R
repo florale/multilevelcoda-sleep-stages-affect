@@ -1,3 +1,5 @@
+source("sleep-affect-utils.R")
+
 # MODELS --------------------
 m_hapa <- readRDS(paste0(outputdir, "m_hapa", ".RDS"))
 m_lapa <- readRDS(paste0(outputdir, "m_lapa", ".RDS"))

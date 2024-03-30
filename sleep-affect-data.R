@@ -1,4 +1,4 @@
-source("setup.R")
+source("sleep-affect-utils.R")
 shs <- readRDS("/Volumes/shared/Behavioral-med-lab/StressHealthStudy/SHS Research Interns/Data/shs_all_ggir.RDS")
 d <- as.data.table(shs)
 
