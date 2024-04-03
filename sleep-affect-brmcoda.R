@@ -2,7 +2,7 @@ source("sleep-affect-data.R")
 
 # full ------------------
 
-m_hapa <- brmcoda(compilr = cilrw_hapa,
+m_hapa <- brmcoda(complr = cilrw_hapa,
                   formula = PosAffHALead ~ 
                     (bilr1 + bilr2 + bilr3) + BTIBz +
                     (wilr1 + wilr2 + wilr3) + WTIBz + 
@@ -15,7 +15,7 @@ m_hapa <- brmcoda(compilr = cilrw_hapa,
                   backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(m_hapa, paste0(outputdir, "m_hapa", ".RDS"))
 
-m_lapa <- brmcoda(compilr = cilrw_lapa,
+m_lapa <- brmcoda(complr = cilrw_lapa,
                   formula = PosAffLALead ~ 
                     (bilr1 + bilr2 + bilr3) + BTIBz +
                     (wilr1 + wilr2 + wilr3) + WTIBz + 
@@ -28,7 +28,7 @@ m_lapa <- brmcoda(compilr = cilrw_lapa,
                   backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(m_lapa, paste0(outputdir, "m_lapa", ".RDS"))
 
-m_hana <- brmcoda(compilr = cilrw_hana,
+m_hana <- brmcoda(complr = cilrw_hana,
                   formula = NegAffHALead ~ 
                     (bilr1 + bilr2 + bilr3) + BTIBz +
                     (wilr1 + wilr2 + wilr3) + WTIBz + 
@@ -41,7 +41,7 @@ m_hana <- brmcoda(compilr = cilrw_hana,
                   backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(m_hana, paste0(outputdir, "m_hana", ".RDS"))
 
-m_lana <- brmcoda(compilr = cilrw_lana,
+m_lana <- brmcoda(complr = cilrw_lana,
                   formula = NegAffLALead ~ 
                     (bilr1 + bilr2 + bilr3) + BTIBz +
                     (wilr1 + wilr2 + wilr3) + WTIBz + 
@@ -55,7 +55,7 @@ m_lana <- brmcoda(compilr = cilrw_lana,
 saveRDS(m_lana, paste0(outputdir, "m_lana", ".RDS"))
 
 # between --------------------
-mb_hapa <- brmcoda(compilr = cilrw_hapa,
+mb_hapa <- brmcoda(complr = cilrw_hapa,
                    formula = PosAffHALead ~ 
                      bilr1 + bilr2 + bilr3 +
                      BTIBz +
@@ -69,7 +69,7 @@ mb_hapa <- brmcoda(compilr = cilrw_hapa,
                    backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mb_hapa, paste0(outputdir, "mb_hapa", ".RDS"))
 
-mb_lapa <- brmcoda(compilr = cilrw_lapa,
+mb_lapa <- brmcoda(complr = cilrw_lapa,
                    formula = PosAffLALead ~ 
                      bilr1 + bilr2 + bilr3 +
                      BTIBz +
@@ -83,7 +83,7 @@ mb_lapa <- brmcoda(compilr = cilrw_lapa,
                    backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mb_lapa, paste0(outputdir, "mb_lapa", ".RDS"))
 
-mb_hana <- brmcoda(compilr = cilrw_hana,
+mb_hana <- brmcoda(complr = cilrw_hana,
                    formula = NegAffHALead ~ 
                      bilr1 + bilr2 + bilr3 +
                      BTIBz +
@@ -97,7 +97,7 @@ mb_hana <- brmcoda(compilr = cilrw_hana,
                    backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mb_hana, paste0(outputdir, "mb_hana", ".RDS"))
 
-mb_lana <- brmcoda(compilr = cilrw_lana,
+mb_lana <- brmcoda(complr = cilrw_lana,
                    formula = NegAffLALead ~ 
                      bilr1 + bilr2 + bilr3 +
                      BTIBz +
@@ -112,7 +112,7 @@ mb_lana <- brmcoda(compilr = cilrw_lana,
 saveRDS(mb_lana, paste0(outputdir, "mb_lana", ".RDS"))
 
 # within ---------------------
-mw_hapa <- brmcoda(compilr = cilrw_hapa,
+mw_hapa <- brmcoda(complr = cilrw_hapa,
                    formula = PosAffHALead ~ 
                      wilr1 + wilr2 + wilr3 +
                      BTIBz +
@@ -126,7 +126,7 @@ mw_hapa <- brmcoda(compilr = cilrw_hapa,
                    backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mw_hapa, paste0(outputdir, "mw_hapa", ".RDS"))
 
-mw_lapa <- brmcoda(compilr = cilrw_lapa,
+mw_lapa <- brmcoda(complr = cilrw_lapa,
                    formula = PosAffLALead ~ 
                      wilr1 + wilr2 + wilr3 +
                      BTIBz +
@@ -140,7 +140,7 @@ mw_lapa <- brmcoda(compilr = cilrw_lapa,
                    backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mw_lapa, paste0(outputdir, "mw_lapa", ".RDS"))
 
-mw_hana <- brmcoda(compilr = cilrw_hana,
+mw_hana <- brmcoda(complr = cilrw_hana,
                    formula = NegAffHALead ~ 
                      wilr1 + wilr2 + wilr3 +
                      BTIBz +
@@ -154,7 +154,7 @@ mw_hana <- brmcoda(compilr = cilrw_hana,
                    backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mw_hana, paste0(outputdir, "mw_hana", ".RDS"))
 
-mw_lana <- brmcoda(compilr = cilrw_lana,
+mw_lana <- brmcoda(complr = cilrw_lana,
                    formula = NegAffLALead ~ 
                      wilr1 + wilr2 + wilr3 +
                      BTIBz +
@@ -169,7 +169,7 @@ mw_lana <- brmcoda(compilr = cilrw_lana,
 saveRDS(mw_lana, paste0(outputdir, "mw_lana", ".RDS"))
 
 # null -----------------
-m0_hapa <- brmcoda(compilr = cilrw_hapa,
+m0_hapa <- brmcoda(complr = cilrw_hapa,
                    formula = PosAffHALead ~ 
                      BTIBz +
                      WTIBz + 
@@ -182,7 +182,7 @@ m0_hapa <- brmcoda(compilr = cilrw_hapa,
                    backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(m0_hapa, paste0(outputdir, "m0_hapa", ".RDS"))
 
-m0_lapa <- brmcoda(compilr = cilrw_lapa,
+m0_lapa <- brmcoda(complr = cilrw_lapa,
                    formula = PosAffLALead ~ 
                      BTIBz +
                      WTIBz + 
@@ -195,7 +195,7 @@ m0_lapa <- brmcoda(compilr = cilrw_lapa,
                    backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(m0_lapa, paste0(outputdir, "m0_lapa", ".RDS"))
 
-m0_hana <- brmcoda(compilr = cilrw_hana,
+m0_hana <- brmcoda(complr = cilrw_hana,
                    formula = NegAffHALead ~ 
                      BTIBz +
                      WTIBz + 
@@ -208,7 +208,7 @@ m0_hana <- brmcoda(compilr = cilrw_hana,
                    backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(m0_hana, paste0(outputdir, "m0_hana", ".RDS"))
 
-m0_lana <- brmcoda(compilr = cilrw_lana,
+m0_lana <- brmcoda(complr = cilrw_lana,
                    formula = NegAffLALead ~ 
                      BTIBz +
                      WTIBz + 
@@ -223,7 +223,7 @@ saveRDS(m0_lana, paste0(outputdir, "m0_lana", ".RDS"))
 
 # interaction ---------------
 # with between and within TIB
-mx1_hapa <- brmcoda(compilr = cilrw_hapa,
+mx1_hapa <- brmcoda(complr = cilrw_hapa,
                     formula = PosAffHALead ~ 
                       (bilr1 + bilr2 + bilr3)*BTIBz +
                       (wilr1 + wilr2 + wilr3)*WTIBz + 
@@ -236,7 +236,7 @@ mx1_hapa <- brmcoda(compilr = cilrw_hapa,
                     backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mx1_hapa, paste0(outputdir, "mx1_hapa", ".RDS"))
 
-mx1_lapa <- brmcoda(compilr = cilrw_lapa,
+mx1_lapa <- brmcoda(complr = cilrw_lapa,
                     formula = PosAffLALead ~ 
                       (bilr1 + bilr2 + bilr3)*BTIBz +
                       (wilr1 + wilr2 + wilr3)*WTIBz + 
@@ -249,7 +249,7 @@ mx1_lapa <- brmcoda(compilr = cilrw_lapa,
                     backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mx1_lapa, paste0(outputdir, "mx1_lapa", ".RDS"))
 
-mx1_hana <- brmcoda(compilr = cilrw_hana,
+mx1_hana <- brmcoda(complr = cilrw_hana,
                     formula = NegAffHALead ~ 
                       (bilr1 + bilr2 + bilr3)*BTIBz +
                       (wilr1 + wilr2 + wilr3)*WTIBz + 
@@ -262,7 +262,7 @@ mx1_hana <- brmcoda(compilr = cilrw_hana,
                     backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mx1_hana, paste0(outputdir, "mx1_hana", ".RDS"))
 
-mx1_lana <- brmcoda(compilr = cilrw_lana,
+mx1_lana <- brmcoda(complr = cilrw_lana,
                     formula = NegAffLALead ~ 
                       (bilr1 + bilr2 + bilr3)*BTIBz +
                       (wilr1 + wilr2 + wilr3)*TIBz +
@@ -276,7 +276,7 @@ mx1_lana <- brmcoda(compilr = cilrw_lana,
 saveRDS(mx1_lana, paste0(outputdir, "mx1_lana", ".RDS"))
 
 # interaction with between and total TIB
-mx2_hapa <- brmcoda(compilr = cilrw_hapa,
+mx2_hapa <- brmcoda(complr = cilrw_hapa,
                     formula = PosAffHALead ~ 
                       (bilr1 + bilr2 + bilr3)*BTIBz +
                       (wilr1 + wilr2 + wilr3)*TIBz + 
@@ -289,7 +289,7 @@ mx2_hapa <- brmcoda(compilr = cilrw_hapa,
                     backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mx2_hapa, paste0(outputdir, "mx2_hapa", ".RDS"))
 
-mx2_lapa <- brmcoda(compilr = cilrw_lapa,
+mx2_lapa <- brmcoda(complr = cilrw_lapa,
                     formula = PosAffLALead ~ 
                       (bilr1 + bilr2 + bilr3)*BTIBz +
                       (wilr1 + wilr2 + wilr3)*TIBz + 
@@ -302,7 +302,7 @@ mx2_lapa <- brmcoda(compilr = cilrw_lapa,
                     backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mx2_lapa, paste0(outputdir, "mx2_lapa", ".RDS"))
 
-mx2_hana <- brmcoda(compilr = cilrw_hana,
+mx2_hana <- brmcoda(complr = cilrw_hana,
                     formula = NegAffHALead ~ 
                       (bilr1 + bilr2 + bilr3)*BTIBz +
                       (wilr1 + wilr2 + wilr3)*TIBz + 
@@ -315,7 +315,7 @@ mx2_hana <- brmcoda(compilr = cilrw_hana,
                     backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mx2_hana, paste0(outputdir, "mx2_hana", ".RDS"))
 
-mx2_lana <- brmcoda(compilr = cilrw_lana,
+mx2_lana <- brmcoda(complr = cilrw_lana,
                     formula = NegAffLALead ~ 
                       (bilr1 + bilr2 + bilr3)*BTIBz +
                       (wilr1 + wilr2 + wilr3)*TIBz +
@@ -329,7 +329,7 @@ mx2_lana <- brmcoda(compilr = cilrw_lana,
 saveRDS(mx2_lana, paste0(outputdir, "mx2_lana", ".RDS"))
 
 # total composition with total TIB 
-mx3_hapa <- brmcoda(compilr = cilrw_hapa,
+mx3_hapa <- brmcoda(complr = cilrw_hapa,
                     formula = PosAffHALead ~ 
                       (ilr1 + ilr2 + ilr3)*TIBz +
                       WPosAffHALeadLag1 +
@@ -341,7 +341,7 @@ mx3_hapa <- brmcoda(compilr = cilrw_hapa,
                     backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mx3_hapa, paste0(outputdir, "mx3_hapa", ".RDS"))
 
-mx3_lapa <- brmcoda(compilr = cilrw_lapa,
+mx3_lapa <- brmcoda(complr = cilrw_lapa,
                     formula = PosAffLALead ~ 
                       (ilr1 + ilr2 + ilr3)*TIBz +
                       WPosAffLALeadLag1 +
@@ -353,7 +353,7 @@ mx3_lapa <- brmcoda(compilr = cilrw_lapa,
                     backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mx3_lapa, paste0(outputdir, "mx3_lapa", ".RDS"))
 
-mx3_hana <- brmcoda(compilr = cilrw_hana,
+mx3_hana <- brmcoda(complr = cilrw_hana,
                     formula = NegAffHALead ~ 
                       (ilr1 + ilr2 + ilr3)*TIBz +
                       WNegAffHALeadLag1 +
@@ -365,7 +365,7 @@ mx3_hana <- brmcoda(compilr = cilrw_hana,
                     backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mx3_hana, paste0(outputdir, "mx3_hana", ".RDS"))
 
-mx3_lana <- brmcoda(compilr = cilrw_lana,
+mx3_lana <- brmcoda(complr = cilrw_lana,
                     formula = NegAffLALead ~ 
                       (ilr1 + ilr2 + ilr3)*TIBz +
                       WNegAffLALeadLag1 +
@@ -378,7 +378,7 @@ mx3_lana <- brmcoda(compilr = cilrw_lana,
 saveRDS(mx3_lana, paste0(outputdir, "mx3_lana", ".RDS"))
 
 # bw composition with total TIB 
-mx4_hapa <- brmcoda(compilr = cilrw_hapa,
+mx4_hapa <- brmcoda(complr = cilrw_hapa,
                     formula = PosAffHALead ~ 
                       (bilr1 + bilr2 + bilr3 + wilr1 + wilr2 + wilr3)*TIBz +
                       WPosAffHALeadLag1 +
@@ -390,7 +390,7 @@ mx4_hapa <- brmcoda(compilr = cilrw_hapa,
                     backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mx4_hapa, paste0(outputdir, "mx4_hapa", ".RDS"))
 
-mx4_lapa <- brmcoda(compilr = cilrw_lapa,
+mx4_lapa <- brmcoda(complr = cilrw_lapa,
                     formula = PosAffLALead ~ 
                       (bilr1 + bilr2 + bilr3 + wilr1 + wilr2 + wilr3)*TIBz +
                       WPosAffLALeadLag1 +
@@ -402,7 +402,7 @@ mx4_lapa <- brmcoda(compilr = cilrw_lapa,
                     backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mx4_lapa, paste0(outputdir, "mx4_lapa", ".RDS"))
 
-mx4_hana <- brmcoda(compilr = cilrw_hana,
+mx4_hana <- brmcoda(complr = cilrw_hana,
                     formula = NegAffHALead ~ 
                       (bilr1 + bilr2 + bilr3 + wilr1 + wilr2 + wilr3)*TIBz +
                       WNegAffHALeadLag1 +
@@ -414,7 +414,7 @@ mx4_hana <- brmcoda(compilr = cilrw_hana,
                     backend = "cmdstanr", save_pars = save_pars(all = TRUE))
 saveRDS(mx4_hana, paste0(outputdir, "mx4_hana", ".RDS"))
 
-mx4_lana <- brmcoda(compilr = cilrw_lana,
+mx4_lana <- brmcoda(complr = cilrw_lana,
                     formula = NegAffLALead ~ 
                       (bilr1 + bilr2 + bilr3 + wilr1 + wilr2 + wilr3)*TIBz +
                       WNegAffLALeadLag1 +

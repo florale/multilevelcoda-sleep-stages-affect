@@ -170,20 +170,14 @@ sbp3 <- matrix(c(
   1, -1, -1,
   0, 1, -1), ncol = 3, byrow = TRUE)
 
-
-View(d[,.(ID, SurveyDay, Survey, PosAffHA, PosAffHALead, BPosAffHALead, PosAffHALeadLag1, BPosAffHALeadLag1, WPosAffHALead, WPosAffHALeadLag1, 
-          PosAffLA, NegAffHA, NegAffLA, PosAffLALead, WPosAffLALeadLag1, NegAffHALead, WNegAffHALeadLag1, NegAffLALead, WNegAffLALeadLag1, 
-          SleepLight, SleepDeep, SleepREM, WAKE, TIBz, CPDzc18)])
-
-
 # make composition and ilr
-cilrw_hapa <- compilr(d[Survey == "Wake"], sbp = sbp4, 
+cilrw_hapa <- complr(d[Survey == "Wake"], sbp = sbp4, 
                       parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
-cilrw_lapa <- compilr(d[Survey == "Wake"], sbp = sbp4, 
+cilrw_lapa <- complr(d[Survey == "Wake"], sbp = sbp4, 
                       parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
-cilrw_hana <- compilr(d[Survey == "Wake"], sbp = sbp4, 
+cilrw_hana <- complr(d[Survey == "Wake"], sbp = sbp4, 
                       parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
-cilrw_lana <- compilr(d[Survey == "Wake"], sbp = sbp4, 
+cilrw_lana <- complr(d[Survey == "Wake"], sbp = sbp4, 
                       parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
 
 summary(cilrw_hapa)
