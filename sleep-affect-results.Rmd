@@ -1,0 +1,68 @@
+---
+title: "Daily Reallocation of Sleep Stages and Affect"
+author: Flora (flora.le@monash.edu)
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: spacelab
+    highlight: zenburn
+    toc: no
+    toc_float: no
+    collapsed: no
+    smooth_scroll: no
+    toc_depth: 4
+    fig_width: 7
+    fig_height: 5
+    fig_caption: yes
+    number_sections: true
+---
+
+This file presents the full 
+daily reallocation of sleep stages and affect
+results using the
+Bayesian compositional multilevel substitution analysis
+for the manuscript:
+Daily Reallocations of Time between Sleep Architecture and Affect: 
+Insights from Bayesian Multilevel Compositional Data Analysis.
+
+```{r, echo=FALSE, message=FALSE}
+source("sleep-affect-results-out.R")
+```
+
+# Statistics for 30-minute Reallocations
+
+ * Reallocation of 30 minutes between sleep stages and high arousal positive affect
+ 
+```{r, warning=FALSE, echo=FALSE, fig.width=9}
+knitr::kable(affect_sub_list[[1]])
+```
+
+ * Reallocation of 30 minutes between sleep stages and low arousal positive affect
+ 
+```{r, warning=FALSE, echo=FALSE}
+knitr::kable(affect_sub_list[[2]])
+```
+
+ * Reallocation of 30 minutes between sleep stages and high arousal negative affect
+ 
+```{r, warning=FALSE, echo=FALSE}
+knitr::kable(affect_sub_list[[3]])
+```
+
+ * Reallocation of 30 minutes between sleep stages and low arousal negative affect
+ 
+```{r, warning=FALSE, echo=FALSE}
+knitr::kable(affect_affect_sub_list[[4]])
+```
+
+# Visualisation of Reallocation from 1 to 60 minutes of Sleep Stages and Affect
+## Between person Reallocation
+
+```{r, warning=FALSE, echo = FALSE, results='asis', fig.align='center'}
+walk(sleep_affect_plot_b, print)
+```
+
+## Within person Reallocation
+```{r, warning=FALSE, echo = FALSE, results='asis', fig.align='center'}
+walk(sleep_affect_plot_w, print)
+```
