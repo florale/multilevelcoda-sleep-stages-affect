@@ -34,7 +34,9 @@ library(latex2exp)
 
 library(htmltools)
 library(purrr)
+
 expand.grid.df <- function(...) Reduce(function(...) merge.data.frame(..., by = NULL, all = TRUE), list(...))
+extrafont::loadfonts()
 
 outputdir <- "/Users/florale/Library/CloudStorage/OneDrive-MonashUniversity/PhD/projects/multilevelecoda-sleep-stages/sleep-stages-affect/data/"
 
