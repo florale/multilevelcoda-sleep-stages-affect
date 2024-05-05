@@ -130,10 +130,35 @@ d[, WeekDay := ifelse(DayofWeek %in% c("Saturday", "Sunday"), 0, WeekDay)]
 
 # Composite Phase Deviation
 d[, CPDzc18 := first(na.omit(CPDzc18)), c("ID", "SurveyDay")]
-View(d[, .(ID, CPDzc18, Survey, SurveyDay, PosAffHALead)])
+# View(d[, .(ID, CPDzc18, Survey, SurveyDay, PosAffHALead)])
 
-# sleep composition
+# check missing data
+# 1086 is all
+nrow(d[Survey == "Wake"])
+nrow(d[Survey == "Wake"][complete.cases(PosAffHALead)])
+nrow(d[Survey == "Wake"][complete.cases(PosAffLALead)])
+nrow(d[Survey == "Wake"][complete.cases(NegAffHALead)])
+nrow(d[Survey == "Wake"][complete.cases(NegAffLALead)])
+
+nrow(d[Survey == "Wake"][complete.cases(SleepLight)])
+nrow(d[Survey == "Wake"][complete.cases(SleepDeep)])
+nrow(d[Survey == "Wake"][complete.cases(SleepREM)])
+nrow(d[Survey == "Wake"][complete.cases(WAKE)])
+nrow(d[Survey == "Wake"][complete.cases(TIBz)])
+
+nrow(d[Survey == "Wake"][complete.cases(CPDzc18)])
+
+nrow(d[Survey == "Wake"][complete.cases(Age)][!duplicated(ID)])
+
+nrow(d[Survey == "Wake"][complete.cases(PosAffHA)])
+nrow(d[Survey == "Wake"][complete.cases(PosAffLA)])
+nrow(d[Survey == "Wake"][complete.cases(NegAffHA)])
+nrow(d[Survey == "Wake"][complete.cases(NegAffLA)])
+
 parts <- c("SleepLight", "SleepDeep", "SleepREM", "WAKE")
+
+min(d$BTDATETIMEz, na.rm = TRUE)
+max(d$BTDATETIMEz, na.rm = TRUE)
 
 d <- d[complete.cases(d[, .(SleepLight, SleepDeep, SleepREM, WAKE)])]
 composition_imp <- lrEM(d[, parts, with = FALSE], label = 0,dl = rep(1, 4), ini.cov = "multRepl")
@@ -228,4 +253,9 @@ nrow(d[Survey == "Wake"][complete.cases(TIBz)])
 nrow(d[Survey == "Wake"][complete.cases(CPDzc18)])
 
 nrow(d[Survey == "Wake"][complete.cases(Age)][!duplicated(ID)])
+
+nrow(d[Survey == "Wake"][complete.cases(PosAffHA)])
+nrow(d[Survey == "Wake"][complete.cases(PosAffLA)])
+nrow(d[Survey == "Wake"][complete.cases(NegAffHA)])
+nrow(d[Survey == "Wake"][complete.cases(NegAffLA)])
 
