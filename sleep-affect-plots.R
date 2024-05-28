@@ -1,4 +1,5 @@
 source("sleep-affect-utils.R")
+# source("sleep-affect-data.R") # load for d to work
 
 # sub results ---------------
 m_hapa_sub_adj <- readRDS(paste0(outputdir, "m_hapa_sub_adj", ".RDS"))
@@ -42,7 +43,6 @@ recolorize::plotColorPalette(deutan, main = "Deutanopia")
 recolorize::plotColorPalette(tritan, main = "Tritanopia")
 
 
-
 names <- c(`WAKE` = "TWT",
            `SleepLight` = "Light",
            `SleepDeep` = "SWS",
@@ -82,6 +82,8 @@ rg$smean <- ifelse(level == "within" & sub_models == "m_hapa_sub_adj", sd(d[Surv
 rg$smean <- ifelse(level == "within" & sub_models == "m_lapa_sub_adj", sd(d[Survey == "Wake"]$WPosAffLALead, na.rm = T), rg$smean)
 rg$smean <- ifelse(level == "within" & sub_models == "m_hana_sub_adj", sd(d[Survey == "Wake"]$WNegAffHALead, na.rm = T), rg$smean)
 rg$smean <- ifelse(level == "within" & sub_models == "m_lana_sub_adj", sd(d[Survey == "Wake"]$WNegAffLALead, na.rm = T), rg$smean)
+
+saveRDS(rg, paste0(outputdir, "sleep_affect_rg", ".RDS"))
 
 # between -------------------
 sub_models_b <- list()
@@ -139,14 +141,14 @@ sleep_affect_plot_b <- foreach(i = 1:16,
                                    labs(x = paste0("Difference in ", rg[i, "parts"], " at Between-person Level"),
                                         y = paste0("Estimated Difference")) +
                                    facet_wrap(ggplot2::vars(From, To),
-                                              labeller = label_bquote(cols = .(as.character(From)) %<-% phantom(veryvery) %->% .(as.character(To))),
+                                              labeller = label_bquote(cols = .(as.character(From)) %<-% phantom() ~ minutes ~ phantom() %->% .(as.character(To))),
                                               strip.position = "bottom") +
                                    scale_x_continuous(limits = c(-60, 60),
                                                       breaks = c(-60, 0, 60)) +
                                    scale_y_continuous(limits = c(-2.4, 2.4),
                                                       breaks = c(-2, -1, 0, 1, 2),
                                                       sec.axis = sec_axis(~ . / rg[i, "smean"], name = paste0("Standardised Estimated Difference"))
-                                                      ) +
+                                   ) +
                                    hrbrthemes::theme_ipsum() +
                                    theme(
                                      axis.ticks         = element_blank(),
@@ -227,7 +229,7 @@ sleep_affect_plot_w <- foreach(i = 17:32,
                                    labs(x = paste0("Difference in ", rg[i, "parts"], " at Within-person Level"),
                                         y = paste0("Estimated Difference")) +
                                    facet_wrap(ggplot2::vars(From, To),
-                                              labeller = label_bquote(cols = .(as.character(From)) %<-% phantom(veryvery) %->% .(as.character(To))),
+                                              labeller = label_bquote(cols = .(as.character(From)) %<-% phantom() ~ minutes ~ phantom() %->% .(as.character(To))),
                                               strip.position = "bottom") +
                                    scale_x_continuous(limits = c(-60, 60),
                                                       breaks = c(-60, 0, 60)) +
@@ -279,7 +281,7 @@ ggarrange(sleep_affect_plot_b[[7]], sleep_affect_plot_b[[15]], nrow = 2, legend 
                      "B. Low Arousal Positive Affect at Between-person level"),
           hjust = 0,
           font.label = list(size = 13, color = "black", family = "Arial Narrow")
-          )
+)
 dev.off()
 
 grDevices::cairo_pdf(
@@ -295,4 +297,113 @@ ggarrange(sleep_affect_plot_b[[3]], sleep_affect_plot_w[[4]], sleep_affect_plot_
           font.label = list(size = 13, color = "black", family = "Arial Narrow")
 )
 dev.off()
+
+# for supplementary -------------------
+sleep_affect_plot_b_supp <- foreach(i = 1:16,
+                                    .packages = "multilevelcoda") %dopar% {
+                                      
+                                      ggplot(sub_models_b[[rg[i, "sub_models"]]][To == eval(rg[i, "parts"]) & Level == eval(rg[i, "level"])], 
+                                             aes(x = Delta, y = Mean)) +
+                                        geom_hline(yintercept = 0, linewidth = 0.2, linetype = 2) +
+                                        geom_vline(xintercept = 0, linewidth = 0.2, linetype = 2) +    
+                                        geom_ribbon(aes(ymin = CI_low,
+                                                        ymax = CI_high, fill = From),
+                                                    alpha = alpha) +
+                                        geom_line(aes(colour = From), linewidth = 1) +
+                                        geom_text(aes(label = Sig, colour = From), 
+                                                  size = 7, nudge_x = 0.05, nudge_y = 0.2, 
+                                                  show.legend = FALSE) +
+                                        scale_colour_manual(values = col) +
+                                        scale_fill_manual(values = colf) +
+                                        labs(x = paste0("Difference in ", rg[i, "parts"], " at Between-person Level"),
+                                             y = paste0("Estimated Difference"),
+                                             title =  paste0("Reallocation of ", rg[i, "parts"], " and ", rg[i, "resp"], " at Between-person Level")) +
+                                        facet_wrap(ggplot2::vars(From, To),
+                                                   labeller = label_bquote(cols = .(as.character(From)) %<-% phantom() ~ minutes ~ phantom() %->% .(as.character(To))),
+                                                   strip.position = "bottom") +
+                                        scale_x_continuous(limits = c(-60, 60),
+                                                           breaks = c(-60, 0, 60)) +
+                                        scale_y_continuous(limits = c(-2.4, 2.4),
+                                                           breaks = c(-2, -1, 0, 1, 2),
+                                                           sec.axis = sec_axis(~ . / rg[i, "smean"], name = paste0("Standardised Estimated Difference"))
+                                        ) +
+                                        hrbrthemes::theme_ipsum() +
+                                        theme(
+                                          axis.ticks          = element_blank(),
+                                          panel.background    = element_blank(),
+                                          panel.border        = element_blank(),
+                                          panel.grid.major    = element_blank(),
+                                          panel.grid.minor    = element_blank(),
+                                          plot.background     = element_rect(fill = "transparent", colour = NA),
+                                          strip.background    = element_rect(fill = "transparent", colour = NA),
+                                          strip.text          = element_text(size = 13, hjust = .5),
+                                          strip.placement     = "outside",
+                                          axis.title.x        = element_blank(),
+                                          axis.title.y        = element_text(size = 12, hjust = .5),
+                                          axis.title.y.right  = element_text(size = 12, hjust = .5, angle = 270),
+                                          plot.title          = element_text(size = 13, hjust = .5, face = "italic"),
+                                          plot.title.position = "plot",
+                                          plot.margin         = margin(.5, .5, 1.5, .5, "cm"),
+                                          legend.position     = "none"
+                                        )
+                                    }
+
+names(sleep_affect_plot_b_supp) <- foreach(i = 1:16) %dopar% {
+  paste0(rg[i, "level_labels"], "Reallocation of ", rg[i, "parts"], " and ", rg[i, "resp"], " at between-person level")
+}
+saveRDS(sleep_affect_plot_b_supp, paste0(outputdir, "sleep_affect_plot_b_supp", ".RDS"))
+
+sleep_affect_plot_w_supp <- foreach(i = 17:32,
+                                    .packages = "multilevelcoda") %dopar% {
+                                      
+                                      ggplot(sub_models_w[[rg[i, "sub_models"]]][To == eval(rg[i, "parts"]) & Level == eval(rg[i, "level"])], 
+                                             aes(x = Delta, y = Mean)) +
+                                        geom_hline(yintercept = 0, linewidth = 0.2, linetype = 2) +
+                                        geom_vline(xintercept = 0, linewidth = 0.2, linetype = 2) +    
+                                        geom_ribbon(aes(ymin = CI_low,
+                                                        ymax = CI_high, fill = From),
+                                                    alpha = alpha) +
+                                        geom_line(aes(colour = From), linewidth = 1) +
+                                        geom_text(aes(label = Sig, colour = From), 
+                                                  size = 7, nudge_x = 0.05, nudge_y = 0.1, 
+                                                  show.legend = FALSE) +
+                                        scale_colour_manual(values = col) +
+                                        scale_fill_manual(values = colf) +
+                                        labs(x = paste0("Difference in ", rg[i, "parts"], " at Within-person Level"),
+                                             y = paste0("Estimated Difference"),
+                                             title =  paste0("Reallocation of ", rg[i, "parts"], " and ", rg[i, "resp"], " at Within-person Level")) +
+                                        facet_wrap(ggplot2::vars(From, To),
+                                                   labeller = label_bquote(cols = .(as.character(From)) %<-% phantom() ~ minutes ~ phantom() %->% .(as.character(To))),
+                                                   strip.position = "bottom") +
+                                        scale_x_continuous(limits = c(-60, 60),
+                                                           breaks = c(-60, 0, 60)) +
+                                        scale_y_continuous(limits = c(-0.5, 0.5),
+                                                           breaks = c(-0.5, -0.25, 0, 0.25, 0.5),
+                                                           sec.axis = sec_axis(~ . / rg[i, "smean"], name = paste0("Standardised Estimated Difference"))
+                                        ) +
+                                        hrbrthemes::theme_ipsum() +
+                                        theme(
+                                          axis.ticks          = element_blank(),
+                                          panel.background    = element_blank(),
+                                          panel.border        = element_blank(),
+                                          panel.grid.major    = element_blank(),
+                                          panel.grid.minor    = element_blank(),
+                                          plot.background     = element_rect(fill = "transparent", colour = NA),
+                                          strip.background    = element_rect(fill = "transparent", colour = NA),
+                                          strip.text          = element_text(size = 13, hjust = .5),
+                                          strip.placement     = "outside",
+                                          axis.title.x        = element_blank(),
+                                          axis.title.y        = element_text(size = 12, hjust = .5),
+                                          axis.title.y.right  = element_text(size = 12, hjust = .5, angle = 270),
+                                          plot.title          = element_text(size = 13, hjust = .5, face = "italic"),
+                                          plot.title.position = "plot",
+                                          plot.margin         = margin(.5, .5, 1.5, .5, "cm"),
+                                          legend.position     = "none"
+                                        )
+                                    }
+
+names(sleep_affect_plot_w_supp) <- foreach(i = 17:32) %dopar% {
+  paste0(rg[i, "level_labels"], "Reallocation of ", rg[i, "parts"], " and ", rg[i, "resp"])
+}
+saveRDS(sleep_affect_plot_w_supp, paste0(outputdir, "sleep_affect_plot_w_supp", ".RDS"))
 
