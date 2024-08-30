@@ -1,1 +1,1 @@
-This repository contains the analysis code for the paper *"Daily, Prospective Associations between Sleep Architecture and Affect: Insights from Bayesian Multilevel Compositional Data Analysis"*.
+This repository contains the analysis code for the paper **"Daily, Prospective Associations between Sleep Architecture and Affect: Insights from Bayesian Multilevel Compositional Data Analysis"** by *Flora Le, Yang Yap, Dorothea Dumuid, and Joshua F. Wiley*
