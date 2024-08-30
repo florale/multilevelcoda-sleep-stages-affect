@@ -158,13 +158,11 @@ sleep_affect_plot_b <- foreach(i = 1:16,
                                      panel.grid.minor   = element_blank(),
                                      plot.background    = element_rect(fill = "transparent", colour = NA),
                                      strip.background   = element_rect(fill = "transparent", colour = NA),
-                                     strip.text         = element_text(size = 11, hjust = .5),
+                                     strip.text         = element_text(size = 13, hjust = .5),
                                      strip.placement    = "outside",
                                      axis.title.x       = element_blank(),
-                                     # axis.title.y       = element_text(size = 12, hjust = .5),
-                                     axis.title.y       = element_blank(),
-                                     # axis.title.y.right = element_text(size = 12, hjust = .5, angle = 270),
-                                     axis.title.y.right = element_blank(),
+                                     axis.title.y       = element_text(size = 12, hjust = .5),
+                                     axis.title.y.right = element_text(size = 12, hjust = .5, angle = 270),
                                      plot.margin        = margin(.5, .5, .5, .5, "cm"),
                                      legend.position    = "none"
                                    )
@@ -248,13 +246,11 @@ sleep_affect_plot_w <- foreach(i = 17:32,
                                      panel.grid.minor   = element_blank(),
                                      plot.background    = element_rect(fill = "transparent", colour = NA),
                                      strip.background   = element_rect(fill = "transparent", colour = NA),
-                                     strip.text         = element_text(size = 11, hjust = .5),
+                                     strip.text         = element_text(size = 13, hjust = .5),
                                      strip.placement    = "outside",
                                      axis.title.x       = element_blank(),
-                                     # axis.title.y       = element_text(size = 12, hjust = .5),
-                                     axis.title.y       = element_blank(),
-                                     # axis.title.y.right = element_text(size = 12, hjust = .5, angle = 270),
-                                     axis.title.y.right = element_blank(),
+                                     axis.title.y       = element_text(size = 12, hjust = .5),
+                                     axis.title.y.right = element_text(size = 12, hjust = .5, angle = 270),
                                      plot.margin        = margin(.5, .5, .5, .5, "cm"),
                                      legend.position    = "none"
                                    )
@@ -280,8 +276,7 @@ grDevices::cairo_pdf(
   width = 9,
   height = 8,
 )
-ggarrange(sleep_affect_plot_b[[7]], sleep_affect_plot_b[[15]], 
-          nrow = 2, legend = "none", 
+ggarrange(sleep_affect_plot_b[[7]], sleep_affect_plot_b[[15]], nrow = 2, legend = "none", 
           labels = c("A. High Arousal Positive Affect at Between-person level", 
                      "B. Low Arousal Positive Affect at Between-person level"),
           hjust = 0,
@@ -294,8 +289,7 @@ grDevices::cairo_pdf(
   width = 9,
   height = 12,
 )
-ggarrange(sleep_affect_plot_b[[3]], sleep_affect_plot_w[[4]], sleep_affect_plot_w[[9]], 
-          nrow = 3, legend = "none",
+ggarrange(sleep_affect_plot_b[[3]], sleep_affect_plot_w[[4]], sleep_affect_plot_w[[9]], nrow = 3, legend = "none",
           labels = c("A. High Arousal Negative Affect at Between-person level", 
                      "B. High Arousal Negative Affect at Within-person level",
                      "C. Low Arousal Negative Affect at Within-person level"),
@@ -303,31 +297,6 @@ ggarrange(sleep_affect_plot_b[[3]], sleep_affect_plot_w[[4]], sleep_affect_plot_
           font.label = list(size = 13, color = "black", family = "Arial Narrow")
 )
 dev.off()
-
-# all
-grDevices::cairo_pdf(
-  file = paste0(outputdir, "plot_sleep_affect", ".pdf"),
-  width = 9,
-  height = 13,
-)
-fig <- ggarrange(sleep_affect_plot_b[[7]], sleep_affect_plot_b[[15]], 
-          sleep_affect_plot_b[[3]], sleep_affect_plot_w[[4]], sleep_affect_plot_w[[9]], 
-          nrow = 5, legend = "none",
-          labels = c("A. High Arousal Positive Affect at Between-person level", 
-                     "B. Low Arousal Positive Affect at Between-person level",
-                     "C. High Arousal Negative Affect at Between-person level", 
-                     "D. High Arousal Negative Affect at Within-person level",
-                     "E. Low Arousal Negative Affect at Within-person level")
-          ,
-          hjust = 0,
-          font.label = list(size = 11, color = "black", family = "Arial Narrow", face = "italic")
-)
-annotate_figure(fig, 
-                left = text_grob("Estimated Difference", size = 13, rot = 90, family = "Arial Narrow", face = "bold"),
-                right = text_grob("Standardised Estimated Difference", size = 13, rot = 270, family = "Arial Narrow", face = "bold"))
-
-dev.off()
-
 
 # for supplementary -------------------
 sleep_affect_plot_b_supp <- foreach(i = 1:16,
