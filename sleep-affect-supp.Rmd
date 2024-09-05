@@ -30,7 +30,7 @@ source("sleep-affect-supp.R")
 
 # Statistics for 30-minute Reallocations
 
-*Notes*. All estimates are relative to the mean sleep architecture composition at within-person level. 
+*Notes*. All estimates are relative to the mean sleep architecture composition. 
 TWT = total wake time in bed, Light = light sleep, SWS = slow wave sleep, REM = rapid eye movement sleep. 
 * indicates 95% credible intervals not containing 0. 
 Models adjusted for age, sex, race/ethnicity, subjective social status, 
@@ -62,7 +62,7 @@ knitr::kable(sleep_affect_sub_list[[4]])
 
 # Visualisation of Reallocation from 1 to 60 minutes of Sleep Stages and Affect
 
-*Notes*. All estimates are relative to the mean sleep architecture composition at within-person level. 
+*Notes*. All estimates are relative to the mean sleep architecture composition. 
 TWT = total wake time in bed, Light = light sleep, SWS = slow wave sleep, REM = rapid eye movement sleep. 
 * indicates 95% credible intervals not containing 0. 
 Models adjusted for age, sex, race/ethnicity, subjective social status, 
