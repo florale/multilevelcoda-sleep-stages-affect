@@ -224,6 +224,13 @@ egltable(c("PosAffHALead", "PosAffLALead", "NegAffHALead", "NegAffLALead",
          data = d[Survey == "Wake"][, (fvars) := lapply(.SD, as.factor), .SDcols = fvars]
 )
 
+# range
+psych::describe(d$Age)
+psych::describe(d$SES_1)
+psych::describe(d$BMI)
+
+psych::describe(d$SleepLight)
+
 # ICC
 multilevelTools::iccMixed(c("PosAffHALead"), id = "ID", data = d[Survey == "Wake"])
 multilevelTools::iccMixed(c("PosAffLALead"), id = "ID", data = d[Survey == "Wake"])
