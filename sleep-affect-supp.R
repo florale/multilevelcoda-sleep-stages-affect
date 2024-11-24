@@ -26,6 +26,17 @@ sleep_affect_sub_list <- lapply(list(
   X[, To := ifelse(To == "SleepREM", "REM Sleep", To)]
   X[, To := ifelse(To == "SleepLight", "Light Sleep", To)]
   X[, To := ifelse(To == "WAKE", "Total Wake Time", To)]
+  
+  X$Sig <- between(0, X$CI_low, X$CI_high)
+  X[, Sig := ifelse(Sig == FALSE & Delta %in% c(-30, 30), "Yes", "")]
+  
+  X[, `Estimate [95% CI]` := paste0(format(round(Mean, digits = 2), nsmall = 2),
+                                    " [",
+                                    format(round(CI_low, digits = 2), nsmall = 2),
+                                    ", ",
+                                    format(round(CI_high, digits = 2), nsmall = 2),
+                                    "]")]
+  X <- X[, .(`Estimate [95% CI]`, Minute = Delta, From, To, Level, Sig)]
 })
 
 # graphs

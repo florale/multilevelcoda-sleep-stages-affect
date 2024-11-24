@@ -1,12 +1,12 @@
 ---
-title: "Daily Reallocation of Sleep Stages and Affect"
-author: Flora (flora.le@monash.edu)
-date: "`r Sys.Date()`"
+title: "Supplementary materials: Daily, prospective associations between sleep architecture and affect: insights from Bayesian multilevel compositional data analysis"
+author: Flora Le (flora.le@monash.edu)
+# date: "`r Sys.Date()`"
 output: 
   html_document:
-    theme: spacelab
+    theme: sandstone
     highlight: zenburn
-    toc: no
+    toc: yes
     toc_float: no
     collapsed: no
     smooth_scroll: no
@@ -28,7 +28,7 @@ for the manuscript:
 source("sleep-affect-supp.R")
 ```
 
-# Statistics for 30-minute Reallocations
+# Statistics for 30-minute reallocations
 
 *Notes*. All estimates are relative to the mean sleep architecture composition. 
 TWT = total wake time in bed, Light = light sleep, SWS = slow wave sleep, REM = rapid eye movement sleep. 
@@ -39,28 +39,36 @@ body mass index, weekdays/weekend, circadian misalignment, and previous-night pr
  * Estimated difference in *high arousal positive affect* for reallocation of 30 minutes between sleep stages.
  
 ```{r, warning=FALSE, echo=FALSE, fig.width=9}
-knitr::kable(sleep_affect_sub_list[[1]])
+kbl(sleep_affect_sub_list[[2]], align = "l", espacce = F) %>%
+  kable_styling(bootstrap_options = c("hover", "condensed"), fixed_thead = T) %>%
+  row_spec(0, background = "#FAF7F4")
 ```
 
  * Estimated difference in *low arousal positive affect* for reallocation of 30 minutes between sleep stages.
  
 ```{r, warning=FALSE, echo=FALSE}
-knitr::kable(sleep_affect_sub_list[[2]])
+kbl(sleep_affect_sub_list[[2]], align = "l", espacce = F) %>%
+  kable_styling(bootstrap_options = c("hover", "condensed"), fixed_thead = T) %>%
+  row_spec(0, background = "#DCD5CE")
 ```
 
  * Estimated difference in *high arousal negative affect* for reallocation of 30 minutes between sleep stages.
  
 ```{r, warning=FALSE, echo=FALSE}
-knitr::kable(sleep_affect_sub_list[[3]])
+kbl(sleep_affect_sub_list[[3]], align = "l", espacce = F) %>%
+  kable_styling(bootstrap_options = c("hover", "condensed"), fixed_thead = T) %>%
+  row_spec(0, background = "#CBD5D0")
 ```
 
  * Estimated difference in *low arousal negative affect* for reallocation of 30 minutes between sleep stages.
  
 ```{r, warning=FALSE, echo=FALSE}
-knitr::kable(sleep_affect_sub_list[[4]])
+kbl(sleep_affect_sub_list[[4]], align = "l", espacce = F) %>%
+  kable_styling(bootstrap_options = c("hover", "condensed"), fixed_thead = T) %>%
+  row_spec(0, background = "#9DB3A8")
 ```
 
-# Visualisation of Reallocation from 1 to 60 minutes of Sleep Stages and Affect
+# Figures for reallocations from 1 to 60 minutes
 
 *Notes*. All estimates are relative to the mean sleep architecture composition. 
 TWT = total wake time in bed, Light = light sleep, SWS = slow wave sleep, REM = rapid eye movement sleep. 
@@ -68,13 +76,13 @@ TWT = total wake time in bed, Light = light sleep, SWS = slow wave sleep, REM = 
 Models adjusted for age, sex, race/ethnicity, subjective social status, 
 body mass index, weekdays/weekend, circadian misalignment, and previous-night pre-sleep affect.
 
-## Between person Reallocation
+## Between person
 
 ```{r, warning=FALSE, echo = FALSE, fig.align='center'}
 purrr::walk(sleep_affect_plot_b_supp, print)
 ```
 
-## Within person Reallocation
+## Within person
 ```{r, warning=FALSE, echo = FALSE, fig.align='center'}
 purrr::walk(sleep_affect_plot_w_supp, print)
 ```
