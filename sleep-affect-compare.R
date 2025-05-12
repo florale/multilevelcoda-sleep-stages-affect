@@ -329,3 +329,47 @@ comparison_hanax2
 comparison_lanax4
 comparison_lanax1
 comparison_lanax2
+
+# R2
+r2_bayes(m0_hapa$Model)
+r2_bayes(m0_lapa$Model)
+r2_bayes(m0_hana$Model)
+r2_bayes(m0_lana$Model)
+
+r2_bayes(mb_hapa$Model)
+r2_bayes(mb_lapa$Model)
+r2_bayes(mb_hana$Model)
+r2_bayes(mb_lana$Model)
+
+r2_bayes(mw_hapa$Model)
+r2_bayes(mw_lapa$Model)
+r2_bayes(mw_hana$Model)
+r2_bayes(mw_lana$Model)
+
+r2_bayes(m_hapa$model)
+r2_bayes(m_lapa$model)
+r2_bayes(m_hana$model)
+r2_bayes(m_lana$model)
+
+
+# r2_nakagawa(m_hapa$model)
+# r2_nakagawa(m_lapa$model)
+# r2_nakagawa(m_hana$model)
+# r2_nakagawa(m_lana$model)
+# 
+# r2_nakagawa(mb_hapa$Model)
+# r2_nakagawa(mb_lapa$Model)
+# r2_nakagawa(mb_hana$Model)
+# r2_nakagawa(mb_lana$Model)
+# 
+# r2_nakagawa(mw_hapa$Model)
+# r2_nakagawa(mw_lapa$Model)
+# r2_nakagawa(mw_hana$Model)
+# r2_nakagawa(mw_lana$Model)
+# 
+# r2_nakagawa(m0_hapa$Model)
+# r2_nakagawa(m0_lapa$Model)
+# r2_nakagawa(m0_hana$Model)
+# r2_nakagawa(m0_lana$Model)
+
+cohens_f_squared(mw_hapa$Model, model2 = m0_hapa$Model)

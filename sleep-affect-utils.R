@@ -13,6 +13,7 @@ library(brms)
 library(lme4)
 library(loo)
 library(performance)
+library(effectsize)
 
 library(ggplot2)
 library(scales)
@@ -39,5 +40,5 @@ library(kableExtra)
 expand.grid.df <- function(...) Reduce(function(...) merge.data.frame(..., by = NULL, all = TRUE), list(...))
 extrafont::loadfonts()
 
-outputdir <- "/Users/florale/Library/CloudStorage/OneDrive-MonashUniversity/PhD/projects/multilevelecoda-sleep-stages/sleep-stages-affect/data/"
+outputdir <- "/Users/florale/Library/CloudStorage/OneDrive-Personal/monash/projects/multilevelecoda-sleep-stages/sleep-stages-affect/data/"
 

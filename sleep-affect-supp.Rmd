@@ -28,6 +28,34 @@ for the manuscript:
 source("sleep-affect-supp.R")
 ```
 
+# Scatterplots of raw sleep architecture and affect data
+*Notes*. The plots below show the bivariate associations between sleep architecture and affect,
+without accounting for the compositional nature of the data.
+
+**High arousal positive affect**
+
+```{r, fig.align='center', warning=FALSE, echo = FALSE, message=FALSE, fig.width=6, fig.height=6}
+plot_obs_sleep_hapa
+```
+
+**Low arousal positive affect**
+
+```{r, fig.align='center', warning=FALSE, echo = FALSE, message=FALSE, fig.width=6, fig.height=6}
+plot_obs_sleep_lapa
+```
+
+**High arousal negative affect**
+
+```{r, fig.align='center', warning=FALSE, echo = FALSE, message=FALSE, fig.width=6, fig.height=6}
+plot_obs_sleep_hana
+```
+
+**Low arousal negative affect**
+
+```{r, fig.align='center', warning=FALSE, echo = FALSE, message=FALSE, fig.width=6, fig.height=6}
+plot_obs_sleep_lana
+```
+
 # Statistics for 30-minute reallocations
 
 *Notes*. All estimates are relative to the mean sleep architecture composition. 
@@ -36,7 +64,7 @@ TWT = total wake time in bed, Light = light sleep, SWS = slow wave sleep, REM = 
 Models adjusted for age, sex, race/ethnicity, subjective social status, 
 body mass index, weekdays/weekend, circadian misalignment, and previous-night pre-sleep affect.
 
- * Estimated difference in *high arousal positive affect* for reallocation of 30 minutes between sleep stages.
+**High arousal positive affect**
  
 ```{r, warning=FALSE, echo=FALSE, fig.width=9}
 kbl(sleep_affect_sub_list[[2]], align = "l", espacce = F) %>%
@@ -44,7 +72,7 @@ kbl(sleep_affect_sub_list[[2]], align = "l", espacce = F) %>%
   row_spec(0, background = "#FAF7F4")
 ```
 
- * Estimated difference in *low arousal positive affect* for reallocation of 30 minutes between sleep stages.
+**Low arousal positive affect**
  
 ```{r, warning=FALSE, echo=FALSE}
 kbl(sleep_affect_sub_list[[2]], align = "l", espacce = F) %>%
@@ -52,7 +80,7 @@ kbl(sleep_affect_sub_list[[2]], align = "l", espacce = F) %>%
   row_spec(0, background = "#DCD5CE")
 ```
 
- * Estimated difference in *high arousal negative affect* for reallocation of 30 minutes between sleep stages.
+**High arousal negative affect**
  
 ```{r, warning=FALSE, echo=FALSE}
 kbl(sleep_affect_sub_list[[3]], align = "l", espacce = F) %>%
@@ -60,7 +88,7 @@ kbl(sleep_affect_sub_list[[3]], align = "l", espacce = F) %>%
   row_spec(0, background = "#CBD5D0")
 ```
 
- * Estimated difference in *low arousal negative affect* for reallocation of 30 minutes between sleep stages.
+**Low arousal negative affect**
  
 ```{r, warning=FALSE, echo=FALSE}
 kbl(sleep_affect_sub_list[[4]], align = "l", espacce = F) %>%

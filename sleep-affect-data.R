@@ -197,13 +197,13 @@ sbp3 <- matrix(c(
 
 # make composition and ilr
 cilrw_hapa <- complr(d[Survey == "Wake"], sbp = sbp4, 
-                      parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
+                     parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
 cilrw_lapa <- complr(d[Survey == "Wake"], sbp = sbp4, 
-                      parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
+                     parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
 cilrw_hana <- complr(d[Survey == "Wake"], sbp = sbp4, 
-                      parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
+                     parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
 cilrw_lana <- complr(d[Survey == "Wake"], sbp = sbp4, 
-                      parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
+                     parts = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), total = 448)
 
 summary(cilrw_hapa)
 summary(cilrw_lapa)
@@ -265,4 +265,121 @@ nrow(d[Survey == "Wake"][complete.cases(PosAffHA)])
 nrow(d[Survey == "Wake"][complete.cases(PosAffLA)])
 nrow(d[Survey == "Wake"][complete.cases(NegAffHA)])
 nrow(d[Survey == "Wake"][complete.cases(NegAffLA)])
+
+
+# plot observed data
+d_plot_by_sleep <- melt(d[Survey == "Wake"], id.vars = c("ID", "PosAffHALead", "PosAffLALead", "NegAffHALead", "NegAffLALead"), 
+                        measure.vars = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"),
+                        variable.name = "Sleep",
+                        value.name = "Minutes")
+
+d_plot_by_affect <- melt(d[Survey == "Wake"], id.vars = c("SleepLight", "SleepDeep", "SleepREM", "WAKE"), 
+                         measure.vars = c("PosAffHALead", "PosAffLALead", "NegAffHALead", "NegAffLALead"),
+                         variable.name = "Affect",
+                         value.name = "Rating")
+
+d_plot_by_sleep[Sleep == "SleepLight", Sleep := "Light"]
+d_plot_by_sleep[Sleep == "SleepDeep", Sleep := "SWS"]
+d_plot_by_sleep[Sleep == "SleepREM", Sleep := "REM"]
+d_plot_by_sleep[Sleep == "WAKE", Sleep := "TWT"]
+
+col <- c(`TWT` = "#BBA9A7",
+         `Light` = "#83A192",
+         `SWS` = "#465A3D",
+         `REM` = "#FAD899") #bb847a
+
+colf <- c(`TWT` = "#DDCBB7",
+          `Light` = "#9DB3A8",
+          `SWS` = "#83A192",
+          `REM` = "#FAD899")
+
+sleep_hapa <- ggplot(d_plot_by_sleep, aes(x = Minutes, y = PosAffHALead, colour = Sleep, fill = Sleep)) +
+  geom_point(alpha = 0.1) +
+  labs(y = "High arousal positive affect rating", x = "Minutes in sleep architecture component") +
+  geom_smooth(alpha = 0.3) +
+  scale_y_continuous(limits = c(1, 5)) +
+  scale_colour_manual(values = col) +
+  scale_fill_manual(values = colf) +
+  facet_wrap(~ Sleep, ncol = 2, scale = "free") +
+  theme_minimal() +
+  theme(
+    panel.background  = element_blank(),
+    plot.background   = element_blank(),
+    panel.border      = element_rect(fill = "transparent", colour = "black"),
+    panel.grid.major  = element_blank(),
+    panel.grid.minor  = element_blank(),
+    text = element_text(size = 11, family = "Arial Narrow"),
+    legend.position   = "none",
+  )
+
+ggsave(paste0(outputdir, "sleep_hapa.png"), width = 5, height = 5, dpi = 300)
+saveRDS(sleep_hapa, paste0(outputdir, "sleep_hapa", ".RDS"))
+
+sleep_lapa <- ggplot(d_plot_by_sleep, aes(x = Minutes, y = PosAffLALead, colour = Sleep, fill = Sleep)) +
+  geom_point(alpha = 0.1) +
+  labs(y = "Low arousal positive affect rating", x = "Minutes in sleep architecture component") +
+  geom_smooth(alpha = 0.3) +
+  scale_y_continuous(limits = c(1, 5)) +
+  scale_colour_manual(values = col) +
+  scale_fill_manual(values = colf) +
+  facet_wrap(~ Sleep, ncol = 2, scale = "free") +
+  theme_minimal() +
+  theme(
+    panel.background  = element_blank(),
+    plot.background   = element_blank(),
+    panel.border      = element_rect(fill = "transparent", colour = "black"),
+    panel.grid.major  = element_blank(),
+    panel.grid.minor  = element_blank(),
+    text = element_text(size = 11, family = "Arial Narrow"),
+    legend.position   = "none",
+  )
+
+ggsave(paste0(outputdir, "sleep_lapa.png"), width = 5, height = 5, dpi = 300)
+saveRDS(sleep_lapa, paste0(outputdir, "sleep_lapa", ".RDS"))
+
+sleep_hana <- ggplot(d_plot_by_sleep, aes(x = Minutes, y = NegAffHALead, colour = Sleep, fill = Sleep)) +
+  geom_point(alpha = 0.1) +
+  labs(y = "High arousal negative affect rating", x = "Minutes in sleep architecture component") +
+  geom_smooth(alpha = 0.3) +
+  scale_y_continuous(limits = c(1, 5)) +
+  scale_colour_manual(values = col) +
+  scale_fill_manual(values = colf) +
+  facet_wrap(~ Sleep, ncol = 2, scale = "free") +
+  theme_minimal() +
+  theme(
+    panel.background  = element_blank(),
+    plot.background   = element_blank(),
+    panel.border      = element_rect(fill = "transparent", colour = "black"),
+    panel.grid.major  = element_blank(),
+    panel.grid.minor  = element_blank(),
+    text = element_text(size = 11, family = "Arial Narrow"),
+    legend.position   = "none",
+  )
+
+ggsave(paste0(outputdir, "sleep_hana.png"), width = 5, height = 5, dpi = 300)
+saveRDS(sleep_hana, paste0(outputdir, "sleep_hana", ".RDS"))
+
+sleep_lana <- ggplot(d_plot_by_sleep, aes(x = Minutes, y = NegAffLALead, colour = Sleep, fill = Sleep)) +
+  geom_point(alpha = 0.1) +
+  labs(y = "Low arousal negative affect rating", x = "Minutes in sleep architecture component") +
+  geom_smooth(alpha = 0.3) +
+  # scale_y_continuous(limits = c(0, 5)) +
+  scale_colour_manual(values = col) +
+  scale_fill_manual(values = colf) +
+  facet_wrap(~ Sleep, ncol = 2, scale = "free") +
+  theme_minimal() +
+  theme(
+    panel.background  = element_blank(),
+    plot.background   = element_blank(),
+    panel.border      = element_rect(fill = "transparent", colour = "black"),
+    panel.grid.major  = element_blank(),
+    panel.grid.minor  = element_blank(),
+    text = element_text(size = 11, family = "Arial Narrow"),
+    legend.position   = "none",
+  )
+
+ggsave(paste0(outputdir, "sleep_lana.png"), width = 5, height = 5, dpi = 300)
+saveRDS(sleep_lana, paste0(outputdir, "sleep_lana", ".RDS"))
+
+
 

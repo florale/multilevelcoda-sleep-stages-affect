@@ -16,7 +16,7 @@ sleep_affect_sub_list <- lapply(list(
   m_hapa_sub_adj, m_lapa_sub_adj, m_hana_sub_adj, m_lana_sub_adj
 ), function(X) {
   
-  X <- summary(X, delta = 30)
+  X <- summary(X, delta = 30)[Delta == 30]
   X[, From := ifelse(From == "SleepDeep", "Slow Wave Sleep", From)]
   X[, From := ifelse(From == "SleepREM", "REM Sleep", From)]
   X[, From := ifelse(From == "SleepLight", "Light Sleep", From)]
@@ -122,3 +122,14 @@ loo_compare_hapa <- loo::loo_compare(loo_m0_hapa, loo_mb_hapa, loo_mw_hapa, loo_
 loo_compare_lapa <- loo::loo_compare(loo_m0_lapa, loo_mb_lapa, loo_mw_lapa, loo_m_lapa)
 loo_compare_hana <- loo::loo_compare(loo_m0_hana, loo_mb_hana, loo_mw_hana, loo_m_hana)
 loo_compare_lana <- loo::loo_compare(loo_m0_lana, loo_mb_lana, loo_mw_lana, loo_m_lana)
+
+# plots of observed data
+plot_obs_sleep_hapa <- readRDS(paste0(outputdir, "sleep_hapa", ".RDS"))
+plot_obs_sleep_lapa <- readRDS(paste0(outputdir, "sleep_lapa", ".RDS"))
+plot_obs_sleep_hana <- readRDS(paste0(outputdir, "sleep_hana", ".RDS"))
+plot_obs_sleep_lana <- readRDS(paste0(outputdir, "sleep_lana", ".RDS"))
+
+# plot_obs_sleep_hapa <- png::readPNG(paste0(outputdir, "sleep_hapa", ".png"))
+# plot_obs_sleep_lapa <- png::readPNG(paste0(outputdir, "sleep_lapa", ".png"))
+# plot_obs_sleep_hana <- png::readPNG(paste0(outputdir, "sleep_hana", ".png"))
+# plot_obs_sleep_lana <- png::readPNG(paste0(outputdir, "sleep_lana", ".png"))

@@ -1,14 +1,19 @@
+source("sleep-affect-utils.R")
 
 library(multilevelcoda)
 library(brms)
 
-m_hapa <- readRDS(paste0(outputdir, "m_hapa", ".RDS"))
-m_lapa <- readRDS(paste0(outputdir, "m_lapa", ".RDS"))
+mb_hapa <- readRDS(paste0(outputdir, "mb_hapa", ".RDS"))
+mb_lapa <- readRDS(paste0(outputdir, "mb_lapa", ".RDS"))
 m_hana <- readRDS(paste0(outputdir, "m_hana", ".RDS"))
-m_lana <- readRDS(paste0(outputdir, "m_lana", ".RDS"))
+mw_lana <- readRDS(paste0(outputdir, "mw_lana", ".RDS"))
 
-plot(m_hapa, variable = c("b_Intercept", "b_bilr1", "b_bilr2", "sd_ID__Intercept"), regex = TRUE)
-pp_check(m_hapa$Model, ndraws = 100)
-pp_check(m_lapa$Model, ndraws = 100)
-pp_check(m_hana$Model, ndraws = 100)
-pp_check(m_lana$Model, ndraws = 100)
+plot(mb_hapa, regex = TRUE)
+plot(mb_lapa, regex = TRUE)
+plot(m_hana, regex = TRUE)
+plot(mw_lana, regex = TRUE)
+
+pp_check(mb_hapa$Model, ndraws = 100, type = "stat")
+pp_check(mb_lapa$Model, ndraws = 100, type = "stat")
+pp_check(m_hana$model, ndraws = 100, type = "stat")
+pp_check(mw_lana$Model, ndraws = 100, type = "stat")
